@@ -8,14 +8,16 @@ import SignupScreen from "./src/screens/SignupScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
-import {Provider as AuthProvider} from './src/context/AuthContext'
+import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import {setNavigator} from './src/navigationRef'
+import { setNavigator } from "./src/navigationRef";
+import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 
 const switchNavigatior = createSwitchNavigator({
+	ResolveAuth: ResolveAuthScreen,
 	loginFlow: createStackNavigator({
 		Signup: SignupScreen,
-		Signin: SigninScreen
+		SignIn: SigninScreen
 	}),
 	mainFlow: createBottomTabNavigator({
 		trackListFlow: createStackNavigator({
@@ -32,7 +34,11 @@ const App = createAppContainer(switchNavigatior);
 export default () => {
 	return (
 		<AuthProvider>
-			<App ref={(navigator) => { setNavigator(navigator) }}/>
+			<App
+				ref={(navigator) => {
+					setNavigator(navigator);
+				}}
+			/>
 		</AuthProvider>
-	)
-}
+	);
+};
